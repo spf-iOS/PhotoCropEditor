@@ -226,7 +226,7 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
     open func setRotationAngle(_ rotationAngle: CGFloat, snap: Bool) {
         var rotation = rotationAngle
         if snap {
-            rotation = nearbyint(rotationAngle / CGFloat(M_PI_2)) * CGFloat(M_PI_2)
+            rotation = nearbyint(rotationAngle / .pi / 2) * .pi / 2
         }
         self.rotationAngle = rotation
     }
@@ -276,7 +276,7 @@ open class CropView: UIView, UIScrollViewDelegate, UIGestureRecognizerDelegate, 
         return image.rotatedImageWithTransform(rotation, croppedToRect: zoomedCropRect())
     }
     
-    func handleRotation(_ gestureRecognizer: UIRotationGestureRecognizer) {
+    @objc func handleRotation(_ gestureRecognizer: UIRotationGestureRecognizer) {
         if let imageView = imageView {
             let rotation = gestureRecognizer.rotation
             let transform = imageView.transform.rotated(by: rotation)
